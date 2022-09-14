@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+    <h2>Form</h2>
+    <form onsubmit="return f()">
+        <label for="name">Ho Va Ten</label>
+        <input type="text" id="name" />
+        <label for="birth">Ngay Sinh</label>
+        <input type="date" id="birth" />
+        <label for="radio">Gioi Tinh</label>
+        <input type="radio" name="gender" value="Nam"  checked/>Nam
+        <input type="radio" name="gender" value="Nu"  checked/>Nu
+        <input type="submit" value="Send" />
+    </form>
+    <br />
+    <div id="result1"></div>
+    <script>
+        function f() {
+            var name = document.getElementById("name").value;
+            var birthdate = document.getElementById("birth").value;
+            var age = getAge(birthdate);
+            var gioitinh = document.querySelector(
+                'input[name="gender"]:checked'
+            ).value;
+
+            var fullnameAge =
+                "Ho va Ten: " + name + ", Tuổi: " + age + ", Gioi tinh: " + gioitinh;
+            document.getElementById("result1").innerText = fullnameAge;
+            return false;
+        }
+
+        function getAge(date) {
+            var today = new Date();
+            var birthDate = new Date(date);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+        
+    </script>
+</body>
+
+</html>
